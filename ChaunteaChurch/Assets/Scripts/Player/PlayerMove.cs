@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour {
 
+    [Header("Move Variables")]
     public float m_maxMoveSpeed = 5f;
     public float m_timeToReachMaxSpeed = 0.1f;
+    public float m_jumpStr = 6.5f;
 
     private Vector3 m_lastStepLocation;
     private Vector3 m_refVelocity;
@@ -13,6 +15,7 @@ public class PlayerMove : MonoBehaviour {
     private CharacterController m_moveController;
     private float m_yVel;
 
+    private float m_jumpCD;
     private Vector3 m_pushDirection;
 
     private float lastTimeSinceStep, m_baseStepPitch;
@@ -71,13 +74,16 @@ public class PlayerMove : MonoBehaviour {
 
     void JumpLogic()
     {
+        if (m_jumpCD > 0)
+            m_jumpCD -= Time.deltaTime;
+
         if (!m_moveController.isGrounded && m_gracePeriod <= 0)
             return;
 
         if (Input.GetButtonDown("Jump"))
         {
-            Debug.Log("JUMP");
-            m_currentVelocity.y = 8.0f;
+            m_currentVelocity.y = m_jumpStr;
+            m_jumpCD = 0.3f;
         }
     }
 
@@ -100,7 +106,7 @@ public class PlayerMove : MonoBehaviour {
         m_currentVelocity = Vector3.SmoothDamp(m_currentVelocity, targetVelocity, ref m_refVelocity, m_timeToReachMaxSpeed);
 
         // Apply gravity
-        if (m_moveController.isGrounded)
+        if (m_moveController.isGrounded && m_gracePeriod <= 0)
             m_yVel = 0;
 
         m_yVel -= 20.0f * Time.deltaTime;

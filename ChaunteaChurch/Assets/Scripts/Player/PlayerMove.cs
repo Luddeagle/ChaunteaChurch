@@ -8,6 +8,7 @@ public class PlayerMove : MonoBehaviour {
     public float m_maxMoveSpeed = 5f;
     public float m_timeToReachMaxSpeed = 0.1f;
     public float m_jumpStr = 6.5f;
+    public float m_ladderStr = 4.0f;
 
     private Vector3 m_lastStepLocation;
     private Vector3 m_refVelocity;
@@ -17,7 +18,10 @@ public class PlayerMove : MonoBehaviour {
 
     private float m_jumpCD;
     private Vector3 m_pushDirection;
+    private bool m_meGrounded;
+    private float m_lastJumpTime;
 
+    [Header("Footstep variables")]
     private float lastTimeSinceStep, m_baseStepPitch;
     public float timeBetweenStep;
     AudioSource m_audioStep;
@@ -43,15 +47,35 @@ public class PlayerMove : MonoBehaviour {
 
         UpdateMovement();
         JumpLogic();
+        GroundLogic();
 
-        if (m_moveController.isGrounded)
+        if (m_meGrounded)
             m_gracePeriod = 0.3f;
     }
 
+    void GroundLogic()
+    {
+        if (m_moveController.isGrounded)
+            m_meGrounded = true;
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, m_moveController.height * 0.6f))
+        {
+            m_meGrounded = true;
+        }
+        else
+            m_meGrounded = false;
+    }
 
     void LateUpdate()
     {
         FootStepSoundLogic();
+    }
+
+    public void ApplyLadderClimb()
+    {
+        m_currentVelocity.y = m_ladderStr;
     }
 
     void FootStepSoundLogic()
@@ -77,13 +101,14 @@ public class PlayerMove : MonoBehaviour {
         if (m_jumpCD > 0)
             m_jumpCD -= Time.deltaTime;
 
-        if (!m_moveController.isGrounded && m_gracePeriod <= 0)
+        if (!m_meGrounded && m_gracePeriod <= 0)
             return;
 
         if (Input.GetButtonDown("Jump"))
         {
             m_currentVelocity.y = m_jumpStr;
             m_jumpCD = 0.3f;
+            m_lastJumpTime = Time.time;
         }
     }
 
@@ -106,7 +131,7 @@ public class PlayerMove : MonoBehaviour {
         m_currentVelocity = Vector3.SmoothDamp(m_currentVelocity, targetVelocity, ref m_refVelocity, m_timeToReachMaxSpeed);
 
         // Apply gravity
-        if (m_moveController.isGrounded && m_gracePeriod <= 0)
+        if (m_moveController.isGrounded && Time.time - m_lastJumpTime > 0.2f)
             m_yVel = 0;
 
         m_yVel -= 20.0f * Time.deltaTime;

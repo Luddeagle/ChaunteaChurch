@@ -1,30 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class PlayerGrab : MonoBehaviour {
 
     // Raycast variables
     public LayerMask m_interactLayerMask;
     public float m_rayCheckLength = 4f;
-    public TextMeshProUGUI m_interactiveText;
 
     private PlayerController m_controller;
     private PlayerCameraController m_camera;
     private Transform m_heldObject;
-
-    private Transform m_rayHitTarget;
-    private bool m_hasCandle;
+    private Interactable m_focusedInteract;
 
     private void Awake()
     {
         m_controller = GetComponent<PlayerController>();
         m_camera = GetComponent<PlayerCameraController>();
         m_heldObject = null;
-
-        m_hasCandle = false;
     }
 
     private void Update()
@@ -39,7 +32,7 @@ public class PlayerGrab : MonoBehaviour {
 
     void InteractLogic()
     {
-
+        if (m_focusedInteract) m_focusedInteract.Interact(m_controller);
     }
 
     private void RayCastLogic()
@@ -53,13 +46,13 @@ public class PlayerGrab : MonoBehaviour {
         if (Physics.Raycast(rayStart, rayDir, out hit, m_rayCheckLength, m_interactLayerMask))
         {
             // Hitting same object, don't do anything
-            if (hit.transform != m_rayHitTarget)
+            if (hit.transform != m_focusedInteract)
                 ProcessNewInteractable(hit.transform);
         }
         else
         {
-            m_rayHitTarget = null;
-            m_interactiveText.text = "";
+            m_focusedInteract = null;
+            PlayerUI.instance.m_interactText.text = "";
         }
     }
 
@@ -69,13 +62,13 @@ public class PlayerGrab : MonoBehaviour {
 
         if (interactable != null)
         {
-            m_rayHitTarget = _t;
-            m_interactiveText.text = "INTERACT";
+            m_focusedInteract = interactable;
+            PlayerUI.instance.m_interactText.text = interactable.m_interactText;
         }
         else
         {
-            m_rayHitTarget = null;
-            m_interactiveText.text = "";
+            m_focusedInteract = null;
+            PlayerUI.instance.m_interactText.text = "";
         }
 
     }

@@ -8,12 +8,8 @@ public enum InteractibleType
     NOT_HOLDABLE
 }
 
-public class Interactable : MonoBehaviour {
+public abstract class Interactable : MonoBehaviour {
 
     public string m_interactText = "INTERACT";
-    public virtual bool Interact(PlayerController _playerController)
-    {
-        // For children classes which need to interact with this
-        return false;
-    }
+    public abstract bool Interact(PlayerController _playerController);
 }

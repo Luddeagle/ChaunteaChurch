@@ -9,16 +9,16 @@ public class Ladder : MonoBehaviour {
 
     private void OnTriggerEnter(Collider c)
     {
-        if (c.transform.CompareTag("Player"))
+        if (c.transform.CompareTag("Ladder"))
         {
-            m_player = c.transform.GetComponent<PlayerMove>();
+            m_player = c.transform.parent.GetComponent<PlayerMove>();
             m_waitTime = 0.3f;
         }
     }
 
     private void OnTriggerExit(Collider c)
     {
-        if (c.transform.CompareTag("Player")) m_player = null;
+        if (c.transform.CompareTag("Ladder")) m_player = null;
     }
 
     private void Update()

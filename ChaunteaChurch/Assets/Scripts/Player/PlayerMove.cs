@@ -28,6 +28,7 @@ public class PlayerMove : MonoBehaviour {
     public float m_minDistBeforeStep = 0.3f;
 
     float m_gracePeriod;
+    public bool m_canMove = true;
 
     private void Awake()
     {
@@ -42,6 +43,9 @@ public class PlayerMove : MonoBehaviour {
 
     void Update()
     {
+        if (!m_canMove)
+            return;
+
         if (m_gracePeriod > 0)
             m_gracePeriod -= Time.deltaTime;
 

@@ -8,6 +8,8 @@ public class PlayerUI : MonoBehaviour {
 
     public TextMeshProUGUI m_interactText;
     public TextMeshProUGUI m_reactText;
+    public TextMeshProUGUI m_paperText;
+    public GameObject m_paper;
 
     public static PlayerUI instance
     { get; private set; }
@@ -18,6 +20,7 @@ public class PlayerUI : MonoBehaviour {
     {
         instance = this;
         m_reactText.text = "";
+        m_paper.SetActive(false);
     }
 
     public void ReactText(string _text)

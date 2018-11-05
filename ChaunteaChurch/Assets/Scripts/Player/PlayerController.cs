@@ -7,7 +7,6 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerGrab))]
 public class PlayerController : MonoBehaviour {
 
-    public PlayerCanvas m_playerCanvas;
     PlayerGrab m_playerHands;
     PlayerMove m_playerMove;
     PlayerCameraController m_cameraController;
@@ -19,8 +18,13 @@ public class PlayerController : MonoBehaviour {
         m_cameraController = GetComponent<PlayerCameraController>();
     }
 
-    private void Update()
+    public void StartMe()
     {
+        m_playerHands.m_canMove = m_playerMove.m_canMove = m_cameraController.m_canMove = true;
+    }
 
+    public void StopMe()
+    {
+        m_playerHands.m_canMove = m_playerMove.m_canMove = m_cameraController.m_canMove = false;
     }
 }

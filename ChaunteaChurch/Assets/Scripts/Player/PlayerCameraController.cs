@@ -21,6 +21,8 @@ public class PlayerCameraController : MonoBehaviour {
     private Quaternion m_storedRotation;
     private Vector3 m_basePosition;
     private float m_screenShakeIntensity, m_screenShakeDurationLeft;
+    public bool m_canMove = true;
+
     void Start ()
     {
         m_lockedMode = false;
@@ -35,6 +37,9 @@ public class PlayerCameraController : MonoBehaviour {
 	
 	void Update ()
     {
+        if (!m_canMove)
+            return;
+
         if (m_lockedMode)
         {
             // Player has no control when game is focused

@@ -13,6 +13,8 @@ public class PlayerGrab : MonoBehaviour {
     private Transform m_heldObject;
     private Interactable m_focusedInteract;
 
+    public bool m_canMove = true;
+
     private void Awake()
     {
         m_controller = GetComponent<PlayerController>();
@@ -22,6 +24,9 @@ public class PlayerGrab : MonoBehaviour {
 
     private void Update()
     {
+        if (!m_canMove)
+            return;
+
         // Check if anything in player's view to play with
         RayCastLogic();
 

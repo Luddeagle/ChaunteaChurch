@@ -18,7 +18,10 @@ public class CandlePuzzleMaster : MonoBehaviour {
         foreach (CandleSwitchInteractable candle in m_puzzleSlots)
         {
             if (!candle.gameObject.activeInHierarchy)
+            {
+                success = false;
                 continue;
+            }
 
             if (!candle.IsCorrect()) success = false;
             if (candle.IsDown()) numDown += 1;

@@ -30,6 +30,6 @@ public class GlowToPlayer : MonoBehaviour {
         m_currentVal = Mathf.MoveTowards(m_currentVal, target, m_moveSpd * Time.deltaTime);
 
         Color finalColor = baseColor * Mathf.LinearToGammaSpace(m_currentVal);
-        GetComponent<Renderer>().material.SetColor("_EmissionColor", finalColor);
+        m_materialToGlow.SetColor("_EmissionColor", finalColor);
     }
 }

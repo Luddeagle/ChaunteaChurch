@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114952071909380722}
   - component: {fileID: 114616051928695632}
   - component: {fileID: 114768717377504316}
+  - component: {fileID: 114707419606925298}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -72,15 +73,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1468728273961850}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 308.37, y: 65.85, z: -100.25}
+  m_LocalRotation: {x: -0, y: -0.9999929, z: -0, w: 0.0037635923}
+  m_LocalPosition: {x: 309.15, y: 64.16, z: -72.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4659608314618970}
   - {fileID: 4771956790258126}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -179.56902, z: 0}
 --- !u!4 &4659608314618970
 Transform:
   m_ObjectHideFlags: 1
@@ -88,7 +89,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1819103927379176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.33, z: -0.355}
+  m_LocalPosition: {x: 0, y: 0.33, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4138954636554042}
@@ -205,8 +206,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_interactLayerMask:
     serializedVersion: 2
-    m_Bits: 512
-  m_rayCheckLength: 4
+    m_Bits: 513
+  m_rayCheckLength: 2.5
+  m_canMove: 1
+--- !u!114 &114707419606925298
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1468728273961850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a042075641ab74cad8e0bfb9fc9249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114768717377504316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -222,6 +235,7 @@ MonoBehaviour:
   m_xSensitivity: 2
   m_ySensitivity: 2
   m_cameraLocked: 1
+  m_canMove: 1
 --- !u!114 &114952071909380722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -239,6 +253,7 @@ MonoBehaviour:
   m_ladderStr: 4
   timeBetweenStep: 0
   m_minDistBeforeStep: 0.3
+  m_canMove: 1
 --- !u!124 &124039076888849822
 Behaviour:
   m_ObjectHideFlags: 1
@@ -255,7 +270,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.49999997
+  m_Radius: 0.6
   m_Height: 1.9999999
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

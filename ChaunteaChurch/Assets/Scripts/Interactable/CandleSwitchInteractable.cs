@@ -63,7 +63,10 @@ public class CandleSwitchInteractable : Interactable {
     IEnumerator MoveTowards(Vector3 target, bool _goingDown, float delay = 0)
     {
         if (delay > 0)
+        {
+            gameObject.layer = 2;
             yield return new WaitForSeconds(delay);
+        }
 
         while (transform.localPosition != target)
         {
@@ -82,6 +85,10 @@ public class CandleSwitchInteractable : Interactable {
             m_down = false;
             InteratableAgain();
         }
+
+        if (delay > 0)
+            gameObject.layer = m_interactLayer;
+
         m_moveRoutine = null;
     }
 }

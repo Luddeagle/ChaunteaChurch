@@ -18,7 +18,7 @@ public class CandleHoleInteractable : Interactable
         {
             if (m_candleToActivate) m_candleToActivate.SetActive(true);
             GameController.instance.ToggleCandleUI(false);
-            Destroy(gameObject);
+            Destroy(this);
         }
         else
         {

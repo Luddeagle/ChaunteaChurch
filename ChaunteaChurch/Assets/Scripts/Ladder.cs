@@ -5,28 +5,22 @@ using UnityEngine;
 public class Ladder : MonoBehaviour {
 
     PlayerMove m_player;
-    float m_waitTime;
 
     private void OnTriggerEnter(Collider c)
     {
         if (c.transform.CompareTag("Ladder"))
         {
             m_player = c.transform.parent.GetComponent<PlayerMove>();
-            m_waitTime = 0.3f;
         }
     }
 
-    private void OnTriggerExit(Collider c)
+    private void OnTriggerExit(Collider other)
     {
-        if (c.transform.CompareTag("Ladder")) m_player = null;
+        m_player = null;
     }
 
     private void Update()
     {
-        if (m_waitTime > 0)
-            m_waitTime -= Time.deltaTime;
-
-        if (m_player && m_waitTime <= 0)
-            m_player.ApplyLadderClimb();
+        if (m_player && Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.5f) m_player.ApplyLadderClimb();
     }
 }

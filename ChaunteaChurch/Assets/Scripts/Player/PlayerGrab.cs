@@ -37,7 +37,11 @@ public class PlayerGrab : MonoBehaviour {
 
     void InteractLogic()
     {
-        if (m_focusedInteract) m_focusedInteract.Interact(m_controller);
+        if (m_focusedInteract)
+        {
+            m_focusedInteract.Interact(m_controller);
+            PlayerUI.instance.m_interactText.text = "";
+        }
     }
 
     private void RayCastLogic()

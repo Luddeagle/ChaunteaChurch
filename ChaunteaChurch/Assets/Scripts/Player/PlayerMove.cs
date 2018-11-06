@@ -79,6 +79,7 @@ public class PlayerMove : MonoBehaviour {
 
     public void ApplyLadderClimb()
     {
+        m_lastJumpTime = Time.time; // Trick to allow moving up
         m_currentVelocity.y = m_ladderStr;
     }
 

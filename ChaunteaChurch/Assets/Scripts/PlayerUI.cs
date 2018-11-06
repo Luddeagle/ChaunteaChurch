@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerUI : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class PlayerUI : MonoBehaviour {
     public TextMeshProUGUI m_reactText;
     public TextMeshProUGUI m_paperText;
     public GameObject m_paper;
+    public GameObject m_end;
 
     public static PlayerUI instance
     { get; private set; }
@@ -21,6 +23,7 @@ public class PlayerUI : MonoBehaviour {
         instance = this;
         m_reactText.text = "";
         m_paper.SetActive(false);
+        m_end.SetActive(false);
     }
 
     public void ReactText(string _text)
@@ -38,6 +41,16 @@ public class PlayerUI : MonoBehaviour {
             if (m_reactTimer <= 0)
                 m_reactText.text = "";
         }
+    }
+
+    public void EndGame()
+    {
+        Application.Quit();
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 }

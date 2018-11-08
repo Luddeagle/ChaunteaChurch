@@ -14,6 +14,12 @@ public class CandleHoleInteractable : Interactable
 
     public override bool Interact(PlayerController _playerController)
     {
+        if (m_candleToActivate == null)
+        {
+            PlayerUI.instance.ReactText(m_reaction);
+            return true;
+        }
+
         if (GameController.instance.m_playerHasCandle)
         {
             if (m_candleToActivate) m_candleToActivate.SetActive(true);

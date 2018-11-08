@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 4258085115319156}
   - component: {fileID: 33026698410568262}
   - component: {fileID: 23416699400733096}
+  - component: {fileID: 64592109785068598}
   m_Layer: 0
   m_Name: YardLantern
   m_TagString: Untagged
@@ -51,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1508072762674382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.00034, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4258085115319156}
@@ -64,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1983187462274050}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 313.2, y: 67.09, z: -80.48}
+  m_LocalPosition: {x: 322.83, y: 66.58, z: -86.97}
   m_LocalScale: {x: 162, y: 162, z: 162}
   m_Children:
   - {fileID: 4049994572149212}
@@ -113,6 +114,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1983187462274050}
   m_Mesh: {fileID: 4300000, guid: 0613be2be17983c48ab8fd764ab37eaa, type: 3}
+--- !u!64 &64592109785068598
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1983187462274050}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 0613be2be17983c48ab8fd764ab37eaa, type: 3}
 --- !u!108 &108154638130910636
 Light:
   m_ObjectHideFlags: 1
@@ -123,7 +138,7 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 0.8867924, g: 0.66986585, b: 0.34718758, a: 0.7764706}
-  m_Intensity: 2
+  m_Intensity: 3
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -142,7 +157,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570

@@ -10,6 +10,7 @@ public class Door : MonoBehaviour {
     Quaternion m_startRot, m_endRot;
     float m_rotateSpeed = 150.0f;
     public bool m_otherDir = false;
+    public bool m_openOnce = false;
 
     private void Awake()
     {
@@ -23,13 +24,22 @@ public class Door : MonoBehaviour {
         if (m_doorOpenTime > 0)
         {
             m_doorOpenTime -= Time.deltaTime;
+            Quaternion prevQuat = transform.rotation;
             transform.rotation = Quaternion.RotateTowards(transform.rotation, m_endRot, m_rotateSpeed * Time.deltaTime);
+
+            if (m_openOnce)
+            {
+                if (prevQuat == transform.rotation)
+                    Destroy(this); // We done with opening
+            }
         }
         else
         {
             transform.rotation = Quaternion.RotateTowards(transform.rotation, m_startRot, m_rotateSpeed * Time.deltaTime);
         }
     }
+
+    public void Open() { m_doorOpenTime = 5.0f; }
 
     private void OnTriggerEnter(Collider c)
     {
